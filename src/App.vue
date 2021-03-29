@@ -5,11 +5,12 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import _http from '@/utils/request'
 export default {
   name: 'App',
   created () {
-    axios({
+    _http({
       url: process.env.VUE_APP_BASE_API + '/sys/login',
       method: 'post',
       data () {
