@@ -51,10 +51,10 @@ module.exports = {
       //     '/xxx': ''
       //   }
       // }
-      '/dev-api': {
+      '/api': {
         target: 'http://localhost:3000',
         pathReWrite: {
-          '^/dev-api': ''
+          '^/api': ''
         }
       }
     }
