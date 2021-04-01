@@ -11,6 +11,8 @@
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
+        <!-- @keyup.enter.**`native`** 表示监听组件的原生事件，
+        比如 keyup就是于input的原生事件，这里写native表示keyup是一个原生事件 -->
         <el-input
           placeholder="请输入密码"
           type="password"
@@ -68,7 +70,12 @@ export default {
           // const res = await sysLogin(this.form)
           // window.console.log(res)
           await this.getUserToken(this.form)
-          this.$router.push('/')
+          const _redirect = this.$route.query.redirect
+          if (_redirect) {
+            this.$router.push(_redirect)
+          } else {
+            this.$router.push('/')
+          }
         } else {
           this.$message.error('验证失败')
         }

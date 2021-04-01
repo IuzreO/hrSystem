@@ -15,26 +15,21 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
-/**
- * If you don't want to use mock-server
- * you want to use MockJs for mock api
- * you can execute: mockXHR()
- *
- * Currently MockJs will be used in the production environment,
- * please remove it before going online ! ! !
- */
-// if (process.env.NODE_ENV === 'production') {
-//   const { mockXHR } = require('../mock')
-//   mockXHR()
-// }
-
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
-
+import directivesObj from '@/directives'
+// Vue.directive('image', {
+//   inserted: function (el, obj) {
+//     el.src = obj.value
+//   }
+// })
+// Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组,数组中属性名的排列顺序和使用 for...in 循环遍历该对象时返回的顺序一致 。
+Object.keys(directivesObj).forEach(item => {
+  Vue.directive(item, directivesObj[item])
+})
 Vue.config.productionTip = false
-
 new Vue({
   el: '#app',
   router,

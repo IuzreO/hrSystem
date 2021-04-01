@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Promise } from 'core-js'
 import { Message } from 'element-ui'
+import { getToken } from '@/utils/auth'
 // 创建axios副本
 const _http = axios.create({
   baseURL: process.env.VUE_APP_BASE_API
@@ -10,6 +11,11 @@ const _http = axios.create({
 // 请求拦截
 _http.interceptors.request.use(
   function (config) {
+    // 如果请求接口需要token才加,如果后端接口对token有限制
+    if (getToken()) {
+      // 请求拦截统一添加token
+      config.headers.Authorization = `Bearer ${getToken()}`
+    }
     return config
   },
   function (error) {

@@ -10,7 +10,7 @@ import 'nprogress/nprogress.css'
 // 不需要token的白名单
 const whitePage = ['/login', '/404']
 // 路由前置守卫
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   // 开启进度条
   NProgress.start()
   // 判断是否存在token
@@ -26,13 +26,21 @@ router.beforeEach((to, from, next) => {
       next()
     } else {
       Message.error('请先登录')
-      next('/login')
+      // 跳转到登录时传参想去的路径
+      next('/login?redirect=' + to.fullPath)
     }
   } else {
     if (to.path === '/login') {
       next('/')
     } else {
-      next()
+      // 已登录 进入相应的页面
+      if (store.getters.isLogin) {
+        next()
+      } else {
+        // 调用接口获取用户信息
+        await store.dispatch('user/getUserInfo')
+        next()
+      }
     }
   }
   // 结束进度条

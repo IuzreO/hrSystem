@@ -8,3 +8,16 @@ export function sysLogin (data) {
     data
   })
 }
+// 封装获取用户数据的接口
+export function getUserInfo () {
+  return request({
+    url: '/sys/profile',
+    method: 'post'
+  })
+}
+// 获取用户图片等详细信息
+export function getSysUser (id) {
+  return request({
+    url: `/sys/user/${id}`
+  })
+}
