@@ -13,7 +13,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.dashboard {
-}
-</style>
+<style lang="scss" scoped></style>

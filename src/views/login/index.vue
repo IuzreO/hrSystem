@@ -69,6 +69,7 @@ export default {
           // 表单验证通过后调用登录方法
           // const res = await sysLogin(this.form)
           // window.console.log(res)
+          this.$message.success('登录成功')
           await this.getUserToken(this.form)
           const _redirect = this.$route.query.redirect
           if (_redirect) {
@@ -81,7 +82,8 @@ export default {
         }
       })
     }
-  }
+  },
+  created () {}
 }
 </script>
 

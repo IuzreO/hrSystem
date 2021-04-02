@@ -11,7 +11,8 @@
       </div>
     </div>
     <div class="right">
-      <el-dropdown>
+      <!-- 绑定点击事件 -->
+      <el-dropdown @command="commandEvent">
         <span class="top-info">
           <!-- 自定义指令 -->
           <img
@@ -25,7 +26,8 @@
         </span>
         <template v-slot:dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item command="home">首页</el-dropdown-item>
+            <el-dropdown-item command="exit">退出</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -50,6 +52,17 @@ export default {
     // 点击切换收起或展开
     iClick () {
       this.$store.dispatch('app/toggleSideBar')
+    },
+    commandEvent (command) {
+      switch (command) {
+        case 'exit': {
+          // 调用vuex中的actions方法中的signout方法删除token和userInfo
+          this.$store.dispatch('user/signOut')
+          this.$message.success('退出成功')
+          this.$router.push('/login?redirect=' + this.$route.fullPath)
+          break
+        }
+      }
     }
   }
   // directives: {

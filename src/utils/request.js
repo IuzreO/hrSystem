@@ -1,7 +1,9 @@
 import axios from 'axios'
 import { Promise } from 'core-js'
 import { Message } from 'element-ui'
-import { getToken } from '@/utils/auth'
+import { getTime, getToken } from '@/utils/auth'
+import store from '@/store'
+import router from '@/router'
 // 创建axios副本
 const _http = axios.create({
   baseURL: process.env.VUE_APP_BASE_API
@@ -15,6 +17,18 @@ _http.interceptors.request.use(
     if (getToken()) {
       // 请求拦截统一添加token
       config.headers.Authorization = `Bearer ${getToken()}`
+      // 后端做法
+      // 比较时间
+      // const nowTime = Date.now()
+      // const expriesTime = getTime()
+      // if (nowTime - expriesTime > 3 * 1000) {
+      //   // token失效处理 1.删除token 2:删除用户信息 3:提示用户 4:跳转登录页面
+      //   store.dispatch('user/signOut')
+      //   Message.error('token过期')
+      //   // 如果是登录页则不需要取
+      //   router.push('/login?redirect=' + window.location.href.split('#')[1])
+      //   return Promise.reject(new Error('token过期'))
+      // }
     }
     return config
   },
@@ -33,6 +47,20 @@ _http.interceptors.response.use(
     }
   },
   function (error) {
+    // 前端做法
+    if (
+      error.response &&
+      error.response.data &&
+      // 状态码为10002则表示token已超时
+      error.response.data.code === 10002
+    ) {
+      // token失效处理 1.删除token 2:删除用户信息 3:提示 4:跳转登录页面
+      store.dispatch('user/signOut')
+      Message.error(error.response.data.message)
+      // 如果是登录页则不需要取
+      router.push('/login?redirect=' + window.location.href.split('#')[1])
+      // window.console.log('401:'[error])
+    }
     return Promise.reject(error)
   }
 )
