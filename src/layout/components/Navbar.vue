@@ -57,26 +57,41 @@ export default {
       switch (command) {
         case 'exit': {
           // 调用vuex中的actions方法中的signout方法删除token和userInfo
-          this.$store.dispatch('user/signOut')
-          this.$message.success('退出成功')
-          this.$router.push('/login?redirect=' + this.$route.fullPath)
-          break
+          this.$confirm('确定退出', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          })
+            .then(() => {
+              this.$message({
+                type: 'success',
+                message: '退出成功'
+              })
+              this.$store.dispatch('user/signOut')
+              this.$router.push('/login?redirect=' + this.$route.fullPath)
+            })
+            .catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消'
+              })
+            })
         }
       }
     }
   }
-  // directives: {
-  //   image: {
-  //     inserted (el, obj) {
-  //       window.console.log(el, obj)
-  //       el.onerror = function () {
-  //         // 只要图片地址错误 则使用默认图片地址
-  //         el.src = obj.value
-  //       }
-  //     }
-  //   }
-  // }
 }
+// directives: {
+//   image: {
+//     inserted (el, obj) {
+//       window.console.log(el, obj)
+//       el.onerror = function () {
+//         // 只要图片地址错误 则使用默认图片地址
+//         el.src = obj.value
+//       }
+//     }
+//   }
+// }
 </script>
 
 <style lang="scss" scoped>

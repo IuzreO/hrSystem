@@ -1,4 +1,4 @@
-// 导入封住好的拦截器方法
+// 导入封装好的拦截器方法
 import request from '@/utils/request'
 import axios from 'axios'
 let _cancelFn = ''
@@ -11,6 +11,7 @@ export function sysLogin (data) {
   return request({
     url: '/sys/login',
     method: 'post',
+    // 取消axios发送请求
     cancelToken: new axios.CancelToken(cancelFn => {
       _cancelFn = cancelFn
     }),

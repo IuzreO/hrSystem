@@ -17,6 +17,7 @@ import '@/permission' // permission control
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
+// 将兄弟组件传值方法$bus挂在到vue原型上
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
 import directivesObj from '@/directives'
@@ -30,6 +31,7 @@ Object.keys(directivesObj).forEach(item => {
   Vue.directive(item, directivesObj[item])
 })
 Vue.config.productionTip = false
+Vue.prototype.$bus = new Vue()
 new Vue({
   el: '#app',
   router,
