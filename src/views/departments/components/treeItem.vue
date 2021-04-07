@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { delDepartment } from '@/api/departments'
 export default {
   props: {
     nodeData: {
@@ -44,16 +45,20 @@ export default {
     commandEvent (str) {
       switch (str) {
         case 'add': {
-          // 通过bus传值弹框组件当前节点数据
-          this.$bus.$emit('isShowEvent', this.nodeData)
+          // 通过bus传值弹框组件当前节点数据 区分是添加按钮还是编辑按钮
+          this.$bus.$emit('isShowEvent', this.nodeData, 'add')
           break
         }
         case 'edit': {
-          window.console.log('修改')
+          this.$bus.$emit('isShowEvent', this.nodeData, 'edit')
           break
         }
         case 'remove': {
-          window.console.log('删除')
+          this.$confirm('确定删除', '温馨提示').then(async () => {
+            await delDepartment(this.nodeData.id)
+            this.$message.success('删除成功')
+            this.$store.dispatch('departments/getTreeData')
+          })
           break
         }
       }
