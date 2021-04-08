@@ -73,6 +73,7 @@ export default {
   methods: {
     async getData () {
       this.loading = true
+      // 调用Vuex中转换属性结构的方法
       await this.$store.dispatch('departments/getTreeData')
       this.loading = false
       // 调用接口获取组织架构数据

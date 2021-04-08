@@ -147,7 +147,7 @@ export default {
           {
             required: true,
             message: '请选择负责人',
-            trigger: 'blur'
+            trigger: 'change'
           }
         ],
         introduce: [

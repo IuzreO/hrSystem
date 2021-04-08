@@ -1,6 +1,9 @@
 <template>
   <div>
-    工资
+    <pageTools>
+      <template #left>左</template>
+      <template #right>右</template>
+    </pageTools>
   </div>
 </template>
 
