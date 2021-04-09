@@ -3,7 +3,7 @@
     <el-card>
       <pageTools :showLeft="false">
         <template #right>
-          <el-button type="primary">导入</el-button>
+          <el-button type="primary" @click="importEvent">导入</el-button>
           <el-button type="primary" @click="add">+新增员工</el-button>
         </template>
       </pageTools>
@@ -60,13 +60,12 @@
         <el-table-column label="操作" width="300px">
           <template v-slot="{ row }">
             <div class="btn">
-              <el-button type="text">查看</el-button>
+              <el-button type="text" @click="look(row.id)">查看</el-button>
               <el-button type="text">转正</el-button>
               <el-button type="text">调岗</el-button>
               <el-button type="text">离职</el-button>
               <el-button type="text">角色</el-button>
               <el-button type="text" @click="del(row.id)">删除</el-button>
-              <el-button type="text">查看</el-button>
             </div>
           </template>
         </el-table-column>
@@ -97,7 +96,7 @@ import { sysUser, delEmployee } from '@/api/employees'
 // import employeesData from '@/api/constant/employees'
 export default {
   components: {
-    add: () => import('./add.vue')
+    add: () => import('./components/add')
   },
   data () {
     return {
@@ -118,7 +117,6 @@ export default {
       const { total, rows } = await sysUser(this.page)
       this.list = rows
       this.page.total = total
-      console.log(total, rows)
     },
     // pageSize 页容量改变时会触发
     handleSizeChange (size) {
@@ -160,6 +158,14 @@ export default {
     // 点击新增员工
     add () {
       this.$refs.add.isShow = true
+    },
+    // 点击导入事件
+    importEvent () {
+      this.$router.push('/employees/importExcel')
+    },
+    // 查看
+    look (id) {
+      this.$router.push('/employees/detail/' + id)
     }
 
     // 定义方法进行转换
