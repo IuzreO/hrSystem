@@ -2,7 +2,7 @@ import Vue from 'vue'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/zh-CN' // lang i18n
+import locale from 'element-ui/lib/locale/lang/zh-CN'
 import '@/styles/index.scss' // global css
 import App from './App'
 import store from './store'
@@ -35,6 +35,9 @@ Vue.prototype.$bus = new Vue()
 // 将全局组件挂载到vue上
 import conponentsJs from '@/components'
 Vue.use(conponentsJs)
+// 注册打印插件
+import Print from 'vue-print-nb'
+Vue.use(Print)
 new Vue({
   el: '#app',
   router,

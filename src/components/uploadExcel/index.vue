@@ -142,7 +142,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .excel-upload-input {
   display: none;
   z-index: -9999;

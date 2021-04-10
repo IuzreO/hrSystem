@@ -31,6 +31,18 @@ export default {
         title: '员工详细'
       },
       component: () => import('@/views/employees/detail.vue')
+    },
+    {
+      // 个人详细打印所有信息+岗位信息
+      // 动态路由匹配 1:配置路由, 2:传值 3:接收
+      // 动态路由的优点 可以控制该参数是否必传 2:参数url更友好
+      path: 'print/:type',
+      name: 'print',
+      hidden: true,
+      meta: {
+        title: '打印详细'
+      },
+      component: () => import('@/views/employees/print.vue')
     }
   ]
 }

@@ -1,5 +1,9 @@
 <template>
   <div class="user-info">
+    <!-- 打印按钮 -->
+    <el-row type="flex" justify="end">
+      <el-button type="primary" size="small" @click="goPrint">打印</el-button>
+    </el-row>
     <!-- 个人信息 -->
     <el-form label-width="220px">
       <!-- 工号 入职时间 -->
@@ -52,11 +56,12 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <!-- 员工照片 -->
+      <!-- 员工头像 -->
       <el-row class="inline-info">
         <el-col :span="12">
           <el-form-item label="员工头像">
             <!-- 放置上传图片 -->
+            <uploadImg v-model="userInfo.staffPhoto"></uploadImg>
           </el-form-item>
         </el-col>
       </el-row>
@@ -85,11 +90,10 @@
             />
           </el-select>
         </el-form-item>
-        <!-- 个人头像 -->
         <!-- 员工照片 -->
-
         <el-form-item label="员工照片">
           <!-- 放置上传图片 -->
+          <uploadImg v-model="formData.staffPhoto"></uploadImg>
         </el-form-item>
         <el-form-item label="国家/地区">
           <el-select v-model="formData.nationalArea" class="inputW2">
@@ -476,7 +480,12 @@ export default {
       await employeesPersonalInfoPut(this.formData)
       this.$message.success('修改成功')
       this.$router.push('/employees')
+    },
+    // 跳转到打印页面
+    goPrint () {
+      this.$router.push('/employees/print/userInfo?id=' + this.userId)
     }
   }
 }
 </script>
+<style lang="scss" scoped></style>

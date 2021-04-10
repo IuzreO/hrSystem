@@ -1,5 +1,8 @@
 <template>
   <div class="job-info">
+    <el-row type="flex" justify="end">
+      <el-button type="primary" size="small" @click="goPrint">打印</el-button>
+    </el-row>
     <!-- 基础信息 -->
     <el-form label-width="220px">
       <div class="block">
@@ -256,7 +259,12 @@ export default {
       await updateJob(this.formData)
       this.$message.success('修改个人岗位信息成功')
       this.$router.push('/employees')
+    },
+    // 跳转到打印页面
+    goPrint () {
+      this.$router.push('/employees/print/job?id=' + this.userId)
     }
   }
 }
 </script>
+<style lang="scss" scoped></style>

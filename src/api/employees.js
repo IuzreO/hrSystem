@@ -64,12 +64,18 @@ export function getJobDetail (id) {
     url: `/employees/${id}/jobs`
   })
 }
-
 // 保存岗位信息
-
 export function updateJob (data) {
   return request({
     url: `/employees/${data.userId}/jobs`,
+    method: 'put',
+    data
+  })
+}
+// 修改用户角色分配
+export function sysUserAssignRoles (data) {
+  return request({
+    url: '/sys/user/assignRoles',
     method: 'put',
     data
   })
