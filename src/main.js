@@ -38,6 +38,10 @@ Vue.use(conponentsJs)
 // 注册打印插件
 import Print from 'vue-print-nb'
 Vue.use(Print)
+// 导入封装好的混入文件
+import mixinsObj from '@/mixins'
+// 全局混入
+Vue.mixin(mixinsObj)
 new Vue({
   el: '#app',
   router,

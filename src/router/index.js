@@ -30,9 +30,9 @@ export const constantRoutes = [
         meta: { title: '首页', icon: 'dashboard' }
       }
     ]
-  },
+  }
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  // { path: '*', redirect: '/404', hidden: true }
 ]
 // 导入需要权限处理的配置路由
 import approvalsRouter from './modules/approvals'
@@ -44,7 +44,7 @@ import salarysRouter from './modules/salarys'
 import settingRouter from './modules/setting'
 import socialRouter from './modules/social'
 // 需要权限的路由
-const needControlRoutes = [
+export const needControlRoutes = [
   approvalsRouter,
   departmentsRouter,
   employeesRouter,
@@ -58,11 +58,11 @@ const createRouter = () =>
   new Router({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
-    routes: [...constantRoutes, ...needControlRoutes]
+    routes: [...constantRoutes]
   })
 
 const router = createRouter()
-
+// 路由还原
 export function resetRouter () {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router

@@ -1,5 +1,9 @@
 <template>
-  <el-dialog :visible.sync="isShow" title="新增" @close="closeEvent">
+  <el-dialog
+    :visible.sync="isShow"
+    :title="mode === 'add' ? '新增' : '修改'"
+    @close="closeEvent"
+  >
     <el-form label-width="120px" :model="form" :rules="rules" ref="form">
       <el-form-item prop="name" label="权限名称">
         <el-input v-model="form.name"></el-input>

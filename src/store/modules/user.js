@@ -6,6 +6,7 @@ import {
   // setTime,
   // removeTime
 } from '@/utils/auth'
+import router, { resetRouter } from '@/router'
 const state = {
   // 拿到token
   token: getToken(),
@@ -54,8 +55,16 @@ const actions = {
   },
   // 退出时删除token以及清空用户信息
   signOut (store) {
+    // 删除token
     store.commit('removeToken')
+    // 清空用户信息
     store.commit('removeUserInfo')
+    // bug:退出登录后 vuex中的路由不会还原 需要设置还原
+    // 方法一 调用路由重置方法
+    // 路由内的routes还原只有静态路由
+    resetRouter()
+    // 方法二 刷新页面
+    // router.go(0)
   }
 }
 export default {

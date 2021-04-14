@@ -19,7 +19,9 @@
             <!-- 作用域插槽 -->
             <template v-slot="scope">
               <div>
-                <el-button type="text">分配权限</el-button>
+                <el-button type="text" @click="setRole(scope.row)"
+                  >分配权限</el-button
+                >
                 <el-button type="text" @click="edit(scope.row)">修改</el-button>
                 <el-button type="text" @click="del(scope.row)">删除</el-button>
               </div>
@@ -63,6 +65,7 @@
     </el-tabs>
     <!-- 导入子组件 -->
     <add ref="add" v-model="showAdd" @getData="getData"></add>
+    <setRole ref="setRole" v-model="showRole"></setRole>
   </div>
 </template>
 
@@ -71,7 +74,8 @@
 import { sysRole, getCompany, delSysRole } from '@/api/setting'
 export default {
   components: {
-    add: () => import('./add')
+    add: () => import('./components/add'),
+    setRole: () => import('./components/setRole')
   },
   data () {
     return {
@@ -79,11 +83,12 @@ export default {
       companyInfo: '', // 企业信息
       activeName: 'role',
       showAdd: false,
+      showRole: false,
       page: {
         // 当前页数
         currPage: 1,
         // 每页显示个数选择器的选项设置 需要包含在:page-sizes中
-        pageSize: 1,
+        pageSize: 5,
         // 总条目数
         total: 10
       }
@@ -174,6 +179,12 @@ export default {
       this.$refs.add.form = { ...row }
       // 将字段修改为编辑
       this.$refs.add.mode = 'edit'
+    },
+    // 权限分配按钮
+    setRole (row) {
+      this.$refs.setRole.showRole = true
+      // 点击分配权限时传入name
+      this.$refs.setRole.getRoleInfo(row.id, row.name)
     }
   }
 }

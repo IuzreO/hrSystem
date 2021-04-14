@@ -35,7 +35,6 @@ export default {
     // 进入页面获取角色
     const { rows } = await sysRole()
     this.roleList = rows
-    console.log(rows)
   },
   methods: {
     // 关闭事件

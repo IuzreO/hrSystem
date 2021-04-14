@@ -6,7 +6,7 @@ export default {
   children: [
     {
       path: '',
-      name: 'permission',
+      name: 'permissions',
       meta: {
         title: '权限管理',
         icon: 'lock'

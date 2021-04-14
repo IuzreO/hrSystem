@@ -39,7 +39,10 @@ router.beforeEach(async (to, from, next) => {
       } else {
         // 调用接口获取用户信息
         await store.dispatch('user/getUserInfo')
-        next()
+        // 将vuex中处理的addRouter应用到前置守卫
+        await store.dispatch('permission/getUserRoutes')
+        // 因为addRouters添加后,新路由还不能使用,需要next(to.fullPath)
+        next(to.fullPath)
       }
     }
   }

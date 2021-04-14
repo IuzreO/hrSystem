@@ -3,7 +3,18 @@
     <el-card>
       <pageTools :showLeft="false">
         <template #right>
-          <el-button type="primary" @click="importEvent">导入</el-button>
+          <!-- <el-button
+            type="primary"
+            @click="importEvent"
+            :disabled="'employees_import' | filterButton"
+            >导入
+          </el-button> -->
+          <el-button
+            type="primary"
+            @click="importEvent"
+            v-if="filterButtonFn('employees_import')"
+            >导入
+          </el-button>
           <el-button type="primary" @click="add">+新增员工</el-button>
         </template>
       </pageTools>
@@ -44,7 +55,6 @@
           :formatter="formatterOf"
         ></el-table-column> -->
         <el-table-column prop="formOfEmployment" label="聘用形式">
-          <!-- 使用过滤器处理时间格式 -->
           <template v-slot="{ row }">
             <div>
               {{ row.formOfEmployment | formatterOf }}
@@ -53,6 +63,7 @@
         </el-table-column>
         <el-input prop="departmentName" label="部门"></el-input>
         <el-table-column prop="timeOfEntry" label="入职时间" width="106px">
+          <!-- 使用过滤器处理时间格式 -->
           <template v-slot="{ row }">
             <div>{{ row.timeOfEntry | formatTime }}</div>
           </template>

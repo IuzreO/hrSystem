@@ -6,7 +6,7 @@ export default {
   children: [
     {
       path: '',
-      name: 'social',
+      name: 'social_securitys',
       meta: {
         title: '社保',
         icon: 'table'
