@@ -11,7 +11,7 @@ export default {
       name: 'approvals', //给路由规则加一个name
       // 路由元信息  存储数据的对象
       meta: {
-        title: '审批',
+        title: 'approvals',
         icon: 'tree-table'
       },
       component: () => import('@/views/approvals/index.vue')

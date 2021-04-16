@@ -8,7 +8,7 @@ export default {
       path: '',
       name: 'salarys',
       meta: {
-        title: '工资',
+        title: 'salarys',
         icon: 'money'
       },
       component: () => import('@/views/salarys/index.vue')

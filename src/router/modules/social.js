@@ -8,7 +8,7 @@ export default {
       path: '',
       name: 'social_securitys',
       meta: {
-        title: '社保',
+        title: 'social_securitys',
         icon: 'table'
       },
       component: () => import('@/views/social/index.vue')

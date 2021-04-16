@@ -8,7 +8,7 @@ export default {
       path: '',
       name: 'settings',
       meta: {
-        title: '公司设置',
+        title: 'settings',
         icon: 'setting'
       },
       component: () => import('@/views/setting/index.vue')

@@ -8,7 +8,7 @@ export default {
       path: '',
       name: 'employees',
       meta: {
-        title: '员工',
+        title: 'employees',
         icon: 'people'
       },
       component: () => import('@/views/employees/index.vue')

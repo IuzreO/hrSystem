@@ -8,7 +8,7 @@ export default {
       path: '',
       name: 'permissions',
       meta: {
-        title: '权限管理',
+        title: 'permissions',
         icon: 'lock'
       },
       component: () => import('@/views/permission/index.vue')

@@ -1,9 +1,31 @@
 <template>
-  <div>首页</div>
+  <div class="dashboard">
+    <div class="right">
+      <work-calendar></work-calendar>
+    </div>
+    <div class="left"></div>
+  </div>
 </template>
 
 <script>
-export default {}
+export default {
+  components: {
+    workCalendar: () => import('./components/workCalendar')
+  }
+}
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.dashboard {
+  display: flex;
+  .right {
+    flex: 1;
+  }
+  .left {
+    flex: 1;
+  }
+  ::v-deep .el-calendar__header {
+    display: none;
+  }
+}
+</style>

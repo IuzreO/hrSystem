@@ -11,6 +11,10 @@
       </div>
     </div>
     <div class="right">
+      <!-- 多语言组件 -->
+      <lang></lang>
+      <!-- 全屏组件使用 -->
+      <FullScreen style="width:20px;height:20px;margin-right:20px"></FullScreen>
       <!-- 绑定点击事件 -->
       <el-dropdown @command="commandEvent">
         <span class="top-info">
@@ -78,6 +82,19 @@ export default {
             })
         }
       }
+    },
+    btnClick () {
+      // this.$il8n===il8n的实例化对象
+      // 后端和前端商量好用一个language字段 1:设置时 2:il8n默认配制时
+      // 语言有记忆功能 il8n实例化时使用
+      // 点击切换语言
+      if (this.$il8n.locale === 'zh') {
+        this.$il8n.locale == 'en'
+      } else {
+        this.$il8n.locale = 'zh'
+      }
+      // 把语言作一个cookie储存
+      jsCookie.set('language', this.$il8n.locale)
     }
   }
 }
@@ -111,7 +128,8 @@ export default {
   }
   .right {
     color: #fff;
-    margin-right: 25px;
+    display: flex;
+    align-items: center;
     .avatar {
       width: 25px;
       height: 25px;

@@ -8,7 +8,7 @@ export default {
       path: '',
       name: 'departments',
       meta: {
-        title: '组织架构',
+        title: 'departments',
         icon: 'skill'
       },
       component: () => import('@/views/departments/index.vue')
